@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nelly Luxuries - Collections</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="brand">
+      <h1>Nelly Luxuries</h1>
+      <span>Reliable &amp; Trusted</span>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="collections.html">Collections</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- INTRO -->
+  <div class="hero-intro">
+    <p class="eyebrow">Curated For You</p>
+    <h2>Browse Our Collections</h2>
+    <p>Find stylish fashion and lifestyle accessories for every occasion.</p>
+    <div class="divider"><div class="divider-diamond"></div></div>
+  </div>
+
+  <!-- PRODUCT GRID -->
+  <section class="collections-section">
+    <div class="product-grid" id="productGrid">
+      <!-- Cards are injected by JS below -->
+    </div>
+  </section>
+
+  <footer class="footer-strip" id="contact">
+    &copy; 2025 Nelly Luxuries &mdash; All Rights Reserved
+  </footer>
+
+  <script>
+    /**
+     * ============================================================
+     *  PRODUCT LIST — ADD / REMOVE ITEMS HERE FREELY
+     *
+     *  Each product object supports:
+     *    name     : string  — product title
+     *    category : string  — small label above the name
+     *    desc     : string  — short description (optional)
+     *    price    : string  — e.g. "GHS 120" or "" to hide
+     *    image    : string  — path to image file
+     *    alt      : string  — image alt text
+     *    link     : string  — href for "View Product" button
+     *    badge    : string  — small corner tag, e.g. "New" (optional)
+     * ============================================================
+     */
+    const products = [
+      {
+        name: "Stylish Shoes",
+        category: "Footwear",
+        desc: "Premium Men and Women shoes for every occasion.",
+        price: "",
+        image: "images/Square shoes .jpg",
+        alt: "Men and Women Shoes",
+        link: "shoes-product.html",
+        badge: "New"
+      },
+      {
+        name: "Trendy Bottle Cups",
+        category: "Lifestyle",
+        desc: "Stay refreshed in style with our designer bottle cups.",
+        price: "",
+        image: "images/IMG-20250629-WA0016.jpg",
+        alt: "Bottle Cups",
+        link: "bottles-product.html",
+        badge: ""
+      },
+      {
+        name: "Dresses for Ladies",
+        category: "Fashion",
+        desc: "Elegant and figure-flattering dresses for every woman.",
+        price: "",
+        image: "images/its tight comme on.jpg",
+        alt: "Ladies Dresses",
+        link: "dresses-product.html",
+        badge: "Trending"
+      },
+      {
+        name: "Elegant Bags",
+        category: "Accessories",
+        desc: "Luxury bags that complete any outfit perfectly.",
+        price: "",
+        image: "images/VL square bag .jpg",
+        alt: "Bags",
+        link: "bags-product.html",
+        badge: ""
+      },
+      {
+        name: "Wristwatches and Necklaces",
+        category: "Jewellery",
+        desc: "Classy timepieces and statement necklaces.",
+        price: "",
+        image: "images/watch and necklace.jpg",
+        alt: "Wristwatches and Necklaces",
+        link: "watches-product.html",
+        badge: ""
+      },
+      {
+        name: "Ankara Styles",
+        category: "Fashion",
+        desc: "Bold and vibrant Ankara prints for authentic African style.",
+        price: "",
+        image: "watches.jpg",
+        alt: "Ankara Styles",
+        link: "watches-product.html",
+        badge: ""
+      },
+      {
+        name: "Nuptial Rings",
+        category: "Jewellery",
+        desc: "Beautifully crafted rings to celebrate your union.",
+        price: "",
+        image: "images/ring.jpg",
+        alt: "Nuptial Rings",
+        link: "rings-product.html",
+        badge: "Special"
+      },
+
+      /* ---- ADD NEW PRODUCTS BELOW THIS LINE ---- */
+      /* Example:
+      {
+        name: "Silk Scarves",
+        category: "Accessories",
+        desc: "Lightweight silk scarves in vibrant prints.",
+        price: "GHS 85",
+        image: "images/scarf.jpg",
+        alt: "Silk Scarves",
+        link: "scarves-product.html",
+        badge: "New"
+      },
+      */
+    ];
+
+    /* ── RENDER FUNCTION ── */
+    function renderProducts() {
+      const grid = document.getElementById('productGrid');
+      grid.innerHTML = '';
+
+      if (products.length === 0) {
+        grid.innerHTML = `
+          <div class="empty-state">
+            <p>No products added yet. Start by adding items to the products array.</p>
+          </div>`;
+        return;
+      }
+
+      products.forEach((p, i) => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.style.animationDelay = `${i * 60}ms`;
+
+        card.innerHTML = `
+          <div class="card-image-wrap">
+            <img src="${p.image}" alt="${p.alt}" loading="lazy"
+                 onerror="this.style.opacity='0.2';this.style.filter='none';" />
+            <div class="overlay"></div>
+            ${p.badge ? `<span class="card-badge">${p.badge}</span>` : ''}
+          </div>
+          <div class="card-body">
+            <span class="card-category">${p.category}</span>
+            <h3 class="card-name">${p.name}</h3>
+            ${p.desc ? `<p class="card-desc">${p.desc}</p>` : ''}
+            <div class="card-footer">
+              ${p.price ? `<span class="card-price">${p.price}</span>` : '<span></span>'}
+              <a href="${p.link}" class="btn-view"><span>View Product</span></a>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    renderProducts();
+  </script>
+</body>
+</html>

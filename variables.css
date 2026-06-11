@@ -1,0 +1,15 @@
+:root {
+      --black:   #06060a;
+      --deep:    #0e0c14;
+      --gold:    #c9a84c;
+      --gold2:   #e8c96d;
+      --ivory:   #f5f0e8;
+      --muted:   #9a9080;
+      --border:  rgba(201,168,76,0.18);
+ }
+
+ *, *::before, *::after {
+     margin: 0; 
+     padding: 0;
+     box-sizing: border-box;
+ }
